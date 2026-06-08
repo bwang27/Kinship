@@ -1,0 +1,13 @@
+curated_SV_reads	read_id	bam
+chrX.1216184.+.chrM.13748.-.	HF2KMDSXY200821:1:2254:27362:16752_2129	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:2357:19244:6355_2129	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:1446:23854:34131_147	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:2363:23800:7357_1171	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:1446:23773:34053_1171	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFHGCDSXY200820:4:2412:24433:1376_147	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:1111:6985:25269_83	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:2363:25111:3051_147	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFHGCDSXY200820:4:2476:14660:15640_83	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:1111:7211:25410_1107	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HFGWKDSXY200820:4:2357:19226:7357_2129	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrX.1216184.+.chrM.13748.-.	HF2KMDSXY200821:1:1446:27462:36558_83	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam

@@ -1,0 +1,2 @@
+chrX	1216184	+	chrM	13753	-	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+chrY	1216184	+	chrM	13753	-	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam

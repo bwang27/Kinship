@@ -1,0 +1,4 @@
+Curated.Marker	Ref/A_score1	Ref/A_idty1	Ref/A_score2	Ref/A_idty2	Mut/B_score1	Mut/B_idty1	Mut/B_score2	Mut/B_idty2
+chr10.8054759.AT.AAAT	39.0	100.0	38.0	83.87	-1	-1	-1	-1
+chr5.38528876.ACAG.AG	37.0	74.29	23.0	80.95	51.0	86.84	37.0	82.86
+chr5.38528874.ACACAGACACACAT.AT	38.0	75.0	20.0	100.0	-1	-1	-1	-1

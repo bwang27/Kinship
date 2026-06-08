@@ -1,0 +1,4 @@
+Curated.Marker	Ref/A_score1	Ref/A_idty1	Ref/A_score2	Ref/A_idty2	Mut/B_score1	Mut/B_idty1	Mut/B_score2	Mut/B_idty2
+chr7.93132562.C.G	-1	-1	-1	-1	-1	-1	-1	-1
+chr17.39727784.C.G	-1	-1	-1	-1	-1	-1	-1	-1
+chr19.56008784.C.G	-1	-1	-1	-1	-1	-1	-1	-1
