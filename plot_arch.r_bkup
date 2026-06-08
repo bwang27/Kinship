@@ -1,0 +1,216 @@
+
+#depth: in region [0, 0.3]
+#cnv: in region [0.32,0.38]
+#sv: in region [0.4,0.7]
+
+
+plot_half_oval<-function(xStart,xEnd,y0,yHeight,lwd=1,col="black") {
+  hori_radius<-abs(xEnd-xStart)/2
+  x0<-0.5*xStart+0.5*xEnd 
+  yy<-seq(from=0,to=abs(yHeight),by=0.02*abs(yHeight))+y0
+  insq<-1-((yy-y0)/yHeight)^2
+  insq[insq<0]<-0
+  xx<-x0-sqrt(insq)*hori_radius
+  lines(xx,yy,lwd=lwd,col=col)
+  xx<-x0+sqrt(insq)*hori_radius
+  lines(xx,yy,lwd=lwd,col=col)
+}
+
+
+plot_arch_function<-function(ifn,cnvsv.ifn, ofn, refgene.ifn, IsonlyPlotDefaultGene, focusGene, padding) {
+  only_default<-IsonlyPlotDefaultGene
+  dt<-read.table(ifn,header=TRUE,sep="\t",colClass="numeric")
+  cnvsv<-NULL
+  if(cnvsv.ifn!="NULL") {
+    cnvsv<-read.table(cnvsv.ifn,header=F,sep="\t",colClass="character")
+  }
+
+  xMM<-max(dt[,1])
+  xmm<-min(dt[,1])
+  x_len<-xMM-xmm
+  my_xmm<-xmm-0.1*x_len
+  my_xMM<-xMM+0.01*x_len
+
+  refgene<-read.table(refgene.ifn,header=TRUE,sep="\t")
+  focus_S<-as.numeric(refgene[refgene[,"gName"]==focusGene & refgene[,"isDefault"]=="Yes","txS"])
+  focus_E<-as.numeric(refgene[refgene[,"gName"]==focusGene & refgene[,"isDefault"]=="Yes","txE"])
+  mychr<-unique(refgene[refgene[,"gName"]==focusGene & refgene[,"isDefault"]=="Yes","chr"])
+  if(padding>0) {
+    my_xmm<-focus_S-padding
+    my_xMM<-focus_E+padding
+  }
+  x_len<-my_xMM-my_xmm
+  dt<-dt[dt[,1]>=my_xmm & dt[,1]<=my_xMM,]
+  pos<-as.numeric(dt[,1])
+  nSmp<-ncol(dt)-1
+
+  overlap_interval<-(as.numeric(refgene[,"txS"])<=my_xmm & as.numeric(refgene[,"txE"])>=my_xmm) | #left boundary in
+                    (as.numeric(refgene[,"txS"])<=my_xMM & as.numeric(refgene[,"txE"])>=my_xMM) | #right boundary in
+                    (as.numeric(refgene[,"txS"])>=my_xmm & as.numeric(refgene[,"txE"])<=my_xMM) # gene in
+  samechr<-refgene[,"chr"] %in% c(mychr)
+  refgene<-refgene[samechr & overlap_interval,]  
+  if(only_default==TRUE) { refgene<-refgene[refgene[,"isDefault"]=="Yes",]; }
+  nIso<-nrow(refgene)
+
+  margin<-0
+  pdf(ofn,width=15,height=2+1.2*nSmp,useDingbats=FALSE)  
+  plot(-100,xlim=c(my_xmm-0.1*x_len,my_xMM+0.01*x_len),ylim=c(-1.5,nSmp+4-margin),bty="n",ylab="",xlab="",cex.axis=0.5,xaxt="n",yaxt="n")
+  
+  lines(c(my_xmm,my_xMM),c(-0.5-margin,-0.5-margin))
+  lines(c(my_xmm,my_xMM),c(nSmp+1-margin,nSmp+1-margin))
+  tick_mm<-as.integer(my_xmm/100000)
+  tick_MM<-as.integer(my_xMM/100000)
+  ticks<-seq(from=tick_mm,to=tick_MM,by=1)/10
+  ppos<-ticks*1000000
+  ticks<-ticks[ppos>my_xmm & ppos<my_xMM]
+  ppos<-ppos[ppos>my_xmm & ppos<my_xMM]
+  for(i in 1:length(ppos)) {
+    lines(c(ppos[i],ppos[i]),c(-0.5-margin,-0.5-margin-0.1))
+    lines(c(ppos[i],ppos[i]),c(nSmp+1-margin,nSmp+1-margin-0.1))
+    text(ppos[i],-0.5-margin-0.1,ticks[i],cex=0.5,pos=1)
+    text(ppos[i],nSmp+1-margin-0.1,ticks[i],cex=0.5,pos=1)
+  }
+  
+  text(my_xmm+0.45*x_len,nSmp-margin+3.2,mychr,cex=1,pos=1)
+  lines(c(focus_S,focus_S),c(0,nSmp-margin+3),lty=2,col="#888888",lwd=0.5)
+  lines(c(focus_E,focus_E),c(0,nSmp-margin+3),lty=2,col="#888888",lwd=0.5)
+  YYY<-nSmp-margin+3
+  yyy<-nSmp-margin+1.5
+  stepp<-1.4/nIso
+  yposs<-seq(from=yyy,to=YYY,by=stepp)
+  for(j in 1:nrow(refgene)) {
+    gName<-refgene[j,"gName"]
+    isoform<-refgene[j,"nmID"]
+    ort<-refgene[j,"strand"]
+    txS<-as.numeric(refgene[j,"txS"])
+    txE<-as.numeric(refgene[j,"txE"])
+    cdsS<-as.numeric(refgene[j,"cdsS"])
+    cdsE<-as.numeric(refgene[j,"cdsE"])
+    exS<-as.numeric(unlist(strsplit(refgene[j,"exonS"],split=",")))
+    exE<-as.numeric(unlist(strsplit(refgene[j,"exonE"],split=",")))
+    lines(c(txS,txE),c(yposs[j],yposs[j]))
+    for(k in 1:length(exS)) {
+      myS<-exS[k]
+      myE<-exE[k]
+      rect(xleft=myS,xright=myE,ytop=yposs[j]+0.05*stepp,ybottom=yposs[j]-0.05*stepp)
+      if(cdsS>myS & cdsS<myE) { myS<-cdsS; }
+      if(cdsE>myS & cdsE<myE) { myE<-cdsE; }
+      if(myS>=cdsS & myE<=cdsE) {
+        rect(xleft=myS,xright=myE,ytop=yposs[j]+0.1*stepp,ybottom=yposs[j]-0.1*stepp)
+      }
+    }
+    if(txS-my_xmm>0.2*x_len) {
+      text(txS,yposs[j],paste(c(gName,isoform, ort),collapse=" | "),cex=0.5,pos=2)
+    } else if(my_xMM-txE>0.2*x_len) {
+      text(txE,yposs[j],paste(c(gName,isoform, ort),collapse=" | "),cex=0.5,pos=4)
+    } else {
+      text(my_xmm,yposs[j],paste(c(gName,isoform, ort),collapse=" | "),cex=0.5,pos=2)
+    }
+  } 
+  
+  for(i in 2:ncol(dt)) {  
+    sjid<-colnames(dt)[i]
+    truSJID<-unlist(strsplit(sjid,split="_"))[1]
+    val_max<-max(dt[,i])  
+    my_val<-(i-2-margin)+0.3*dt[,i]/val_max  # region [0, 0.3]
+    lines(c(my_xmm,my_xmm),c(i-2-margin,i-2-margin+0.8))
+    lines(c(my_xmm,my_xMM),c(i-2-margin,i-2-margin))
+    #lines(pos,my_val)
+    n_pos<-c(pos[1],pos,pos[length(pos)])
+    range(n_pos)
+    n_val<-c(i-2-margin,my_val,i-2-margin)
+    polygon(n_pos,n_val,col="gray",lwd=0.1,border=NA)
+    lines(c(my_xmm,my_xmm-0.007*x_len),c(i-2-margin+0.3,i-2-margin+0.3))
+    text(my_xmm-0.002*x_len,i-2-margin+0.3,sprintf("%.1f",val_max),pos=2,cex=0.5)
+    text(my_xmm,i-2-margin+0.15,sjid,cex=0.5,pos=2)
+      
+    if(!is.null(cnvsv)) {
+      if(sjid %in% cnvsv[,1] | truSJID %in% cnvsv[,1]) {
+        rown<-which(cnvsv[,1] %in% c(sjid,truSJID))
+
+        for(j in 1:length(rown)) {
+          type<-cnvsv[rown[j],2]
+          marker<-cnvsv[rown[j],3]
+          colorr<-cnvsv[rown[j],4]
+          if(type %in% c("CNV","LOH")) {
+            chr<-unlist(strsplit(marker,split=".",fixed=TRUE))[1]
+            startt<-as.numeric(unlist(strsplit(marker,split=".",fixed=TRUE))[2])
+            endd<-as.numeric(unlist(strsplit(marker,split=".",fixed=TRUE))[3])
+            if(chr==mychr) {
+              yy<-i-2-margin+0.32+runif(1,min=-0.2,max=0.5)
+              lines(c(startt,endd),c(yy,yy),col=colorr,lwd=2)
+            }
+          }
+          if(type=="SV") {
+            chrA<-unlist(strsplit(marker,split=".",fixed=TRUE))[1]
+            ortA<-unlist(strsplit(marker,split=".",fixed=TRUE))[3]
+            chrB<-unlist(strsplit(marker,split=".",fixed=TRUE))[4]
+            ortB<-unlist(strsplit(marker,split=".",fixed=TRUE))[6]
+	    if(chrA != "?" && chrB !="?") {
+	      posA<-as.numeric(unlist(strsplit(marker,split=".",fixed=TRUE))[2])
+	      posB<-as.numeric(unlist(strsplit(marker,split=".",fixed=TRUE))[5])
+              if(chrA==mychr && chrB==mychr) {
+                yy<-i-2-margin+0.6
+		yHeight<-0.3
+                yM<-yy+0.36
+                middle<-0.5*posA+0.5*posB				
+		plot_half_oval(xStart=posA,xEnd=posB,y0=yy,yHeight=yHeight,lwd=2,col=colorr)				
+                points(c(posA,posB),c(yy,yy),pch=16,cex=1,col=colorr)
+  	        lines(c(posA,posA),c(yy,yy-0.05),col=colorr)
+  	        lines(c(posB,posB),c(yy,yy-0.05),col=colorr)
+              }
+              if(chrA==mychr && chrB!=mychr) {
+                yy<-i-2-margin+0.52
+                yM<-yy+0.36            
+                lines(c(posA,posA),c(yy-0.05,yM),col=colorr,lwd=2)            
+                points(posA,yy,pch=16,cex=1,col=colorr)
+              }
+              if(chrA!=mychr && chrB==mychr) {
+                yy<-i-2-margin+0.52
+                yM<-yy+0.36            
+                lines(c(posB,posB),c(yy-0.05,yM),col=colorr,lwd=2)            
+                points(posB,yy,pch=16,cex=1,col=colorr)            
+              }
+	    }
+            if(chrA==mychr && chrB=="?") {
+	      posA<-as.numeric(unlist(strsplit(marker,split=".",fixed=TRUE))[2])
+              yy<-i-2-margin+0.52
+	      points(posA,yy,pch=16,cex=1,col=colorr)
+  	      lines(c(posA,posA),c(yy,yy-0.05),col=colorr)
+	    }
+            if(chrA=="?" && chrB==mychr) {
+	      posB<-as.numeric(unlist(strsplit(marker,split=".",fixed=TRUE))[5])
+              yy<-i-2-margin+0.52
+	      points(posB,yy,pch=16,cex=1,col=colorr)
+  	      lines(c(posB,posB),c(yy,yy-0.05),col=colorr)
+	    }
+          }
+        }
+      }
+    } 
+  }
+  dev.off()    
+}
+
+
+args<-commandArgs(trailingOnly=TRUE)
+
+if(length(args)==7) {
+  ifn<-args[1]
+  cnvsv.ifn<-args[2]
+  ofn<-args[3]
+  refgene.ifn<-args[4]
+  IsonlyPlotDefaultGene<-FALSE
+  if(args[5] %in% c("Y", "y","yes","Yes")) {
+    IsonlyPlotDefaultGene<-TRUE
+  }
+  focusGene<-args[6]
+  padding<-as.integer(args[7])
+  plot_arch_function(ifn,cnvsv.ifn, ofn, refgene.ifn, IsonlyPlotDefaultGene, focusGene, padding)
+} else {
+  print("Usage: Rscript ~ <data.mat.ifn> <cnvsv.ifn|NULL> <pdf.ofn> <refgene.def.ifn> <onlyPlotDefaultIsoform|Y|N> <focusGene|MYCN> <padding|-1|5000000>")
+  print("data.mat.ifn: a data matrix, row is chromosomal bins, col1 = chr, col2=pos, col3- are sample names")
+  print("cnvsv.ifn: cnv/sv of samples, one record per row; three columns: samplename, type (CNV/SV), marker(chr1.2345.5678 or chr1.2345.+.chr2.4567.-.ACTG)")
+  print("refgene.def.ifn: /research/groups/xmagrp/projects/SensitiveDetection/xmagrp/code/mRNA/ZL/reference/ncbiRefSeqCurated_hg*default.txt")
+}
+

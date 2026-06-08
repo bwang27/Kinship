@@ -1,2 +1,25 @@
-chrX	1216184	+	chrM	13753	-	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
-chrY	1216184	+	chrM	13753	-	/research/groups/xmagrp/projects/AMLRelapse/common/COGRelapse/Jan2023/CapVal/yfeng27/MP2PRT/minibam/SJALL068189_D1.bam
+Mutation	SearchFor	Region	Class	AAChange
+chr22.23787260.GA.GAAGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;31.E.fs_EGGKLPPYVPRFSVQEIPLTLEATSHCGREEENSCIVTW*;31.E.fs_EGKWETTSVCSEVLCTRDTPHSGGD*;31.EV.EGK*V
+chr22.23787260.GA.GAGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;32.V.fs_VSGKLPPYVPRFSVQEIPLTLEATSHCGREEENSCIVTW*;32.V.fs_VSRWETTSVCSEVLCTRDTPHSGGD*
+chr22.23787260.GA.GAAAGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;31.E.fs_ERWETTSVCSEVLCTRDTPHSGGD*;31.EV.ER*V;31.E.fs_ER*
+chr22.23787260.GA.GAAATGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;31.EV.EMV;31.E.fs_EMVSGKLPPYVPRFSVQEIPLTLEATSHCGREEENSCIVTW*;31.E.fs_EMVSRWETTSVCSEVLCTRDTPHSGGD*
+chr22.23787263.GT.GAT	NeoDonor	splice_donor	donor_abolish	exon_loss
+chr22.23787263.GT.GAAT	NeoDonor	splice_donor	donor_abolish	exon_loss
+chr22.23787263.GT.GAAGGTAAGTT	NeoDonor	splice_donor	neo_donor	neutral;31.E.fs_EEGGKLPPYVPRFSVQEIPLTLEATSHCGREEENSCIVTW*
+chr22.23787263.GT.GAAAGGTAAGTT	NeoDonor	splice_donor	neo_donor	neutral;31.E.fs_EERWETTSVCSEVLCTRDTPHSGGD*
+chr22.23787263.GT.GAAAAGGTAAGTT	NeoDonor	splice_donor	neo_donor	neutral;31.EV.EEKV
+chr22.23787260.GAGGTA.CA	NeoDonor	splice_donor	donor_abolish	exon_loss
+chr22.23787260.GAGGTA.CAAGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;30.S.fs_SQGGKLPPYVPRFSVQEIPLTLEATSHCGREEENSCIVTW*
+chr22.23787260.GAGGTA.CAAAGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;30.S.fs_SQRWETTSVCSEVLCTRDTPHSGGD*
+chr22.23787260.GAGGTA.CAAAAGGTAAGTA	NeoDonor	splice_donor	neo_donor	neutral;30.SE.SQK
+chr22.23787260.GA.GAAGGTAAGTA	Coding	exon	stop_gain	31.EV.EGK*V
+chr22.23787260.GA.GAGGTAAGTA	Coding	exon	frameshift	32.V.fs_VSRWETTSVCSEVLCTRDTPHSGGD*
+chr22.23787260.GA.GAAAGGTAAGTA	Coding	exon	frameshift	31.E.fs_ER*
+chr22.23787260.GA.GAAATGGTAAGTA	Coding	exon	frameshift	31.E.fs_EMVSRWETTSVCSEVLCTRDTPHSGGD*
+chr22.23787260.GAGGTA.CA	NeoAcceptor	intron	neo_acceptor	neutral;31.E.fs_EPGARSRPPRARPRGSPGAGPCAESARLHSSGRAGARARARGCGAWPSGRVGCGPRPLIDLGFPYLFRRGPPPSVLPRFWRREGPQWFRAGLVSSQTQRNGILS*
+chr22.23791754.AG.ACAGAAG	NeoAcceptor	splice_acceptor	neo_acceptor	31.EV.EKV
+chr22.23791754.AG.ACG	NeoAcceptor	splice_acceptor	acceptor_abolish	exon_loss
+chr22.23791754.AG.ACAGAAG	NeoDonor	exon	neo_donor	neutral;31.E.fs_ERRSRIHDSSHQCDPVKSLGSGRDSGWQR*
+chr22.23791754.AG.ACG	NeoDonor	exon	neo_donor	neutral;31.EVGNYLRMFRGSLYKRYPSLWRRLATVEERKKIVASSHGKKTKPNTKD.ED
+chr22.23791895.GT.GAAGGTAAGT	NeoDonor	splice_donor	neo_donor	neutral;77.K.fs_KGRSRIHDSSHQCDPVKSLGSGRDSGWQR*
+chr22.23791765.TA.TCA	Coding	exon	frameshift	34.N.fs_NSPPYVPRFSVQEIPLTLEATSHCGREEENSCIVTW*
